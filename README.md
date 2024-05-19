@@ -12,10 +12,15 @@ The Financial Portfolio Management System is a comprehensive solution designed t
 - **Trade Execution**: Manages the execution, updating, and deletion of trades.
 - **Notifications**: Sends notifications to users regarding their portfolio activities.
 - **Price Alerts**: Alerts users when specified price conditions are met.
+- **Event Management**: Uses Kafka for event streaming and asynchronous communication between microservices.
+- **Caching**: Utilizes Redis for caching frequently accessed data to improve performance.
+- **Saga Orchestration**: Manages distributed transactions across microservices.
+- **Message Queuing**: Uses RabbitMQ for reliable message delivery and processing.
+- **API Gateway**: Centralized entry point for managing and routing API requests.
 
 ## Microservices Architecture
 
-The system is built using a microservices architecture, with each service handling a specific domain of functionality. The services communicate with each other through REST APIs and events.
+The system is built using a microservices architecture, with each service handling a specific domain of functionality. The services communicate with each other through REST APIs, events, and message queues.
 
 ### Services and Database Types
 
@@ -38,7 +43,10 @@ The system is built using a microservices architecture, with each service handli
 - **Docker**: Containerization of microservices for easy deployment.
 - **Kubernetes**: Orchestration of Docker containers.
 - **Kafka**: Event streaming platform for handling asynchronous communication between microservices.
-- **Angular**: Frontend framework for building the user interface.
+- **RabbitMQ**: Message broker for reliable message delivery and processing.
+- **Redis**: In-memory data structure store for caching.
+- **API Gateway**: Centralized entry point for managing and routing API requests.
+- **Saga Pattern**: Implementation of distributed transactions across microservices.
 
 ## Setup and Installation
 
@@ -50,6 +58,9 @@ The system is built using a microservices architecture, with each service handli
 - Kubernetes
 - MongoDB
 - MySQL
+- Redis
+- Kafka
+- RabbitMQ
 - AWS CLI
 
 ### Clone the Repository
