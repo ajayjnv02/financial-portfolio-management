@@ -1,0 +1,9 @@
+rootProject.name = 'financial-portfolio-management'
+
+include 'user-service'
+include 'portfolio-service'
+include 'investment-service'
+include 'trade-service'
+include 'notification-service'
+include 'price-alert-service'
+include 'common'

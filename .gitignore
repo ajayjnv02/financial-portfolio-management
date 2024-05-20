@@ -1,0 +1,56 @@
+# Java and Gradle specific
+*.class
+*.war
+*.ear
+*.jar
+/build/
+/out/
+/target/
+
+# Spring Boot specific
+/BOOT-INF/
+/META-INF/
+/logs/
+
+# Gradle specific
+.gradle
+/build/
+/out/
+!gradle-wrapper.jar
+gradle-app.setting
+
+# Eclipse specific
+/.metadata
+/.classpath
+/.project
+/.settings/
+
+# IntelliJ IDEA specific
+/.idea/
+/*.iml
+/modules.xml
+/target/
+.idea/
+/.idea_modules/
+*.ipr
+*.iws
+*.iml
+/out/
+
+# Maven specific
+.mvn/
+!**/mvnw
+!**/mvnw.cmd
+/target/
+dependency-reduced-pom.xml
+
+# Node specific
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# MacOS specific
+.DS_Store
+
+# Windows specific
+Thumbs.db
