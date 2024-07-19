@@ -55,8 +55,8 @@ yarn-error.log
 # Windows specific
 Thumbs.db
 /user-service/target/classes/application.yaml
-/trade-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
-/user-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+*.lst
+*.jar.original
 /gradle/wrapper/gradle-wrapper.jar
 /common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 /investment-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
@@ -72,3 +72,5 @@ Thumbs.db
 /price-alert-service/target/maven-archiver/pom.properties
 /trade-service/target/maven-archiver/pom.properties
 /user-service/target/maven-archiver/pom.properties
+/portfolio-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/investment-service/target/investment-service-1.0.0.jar.original
