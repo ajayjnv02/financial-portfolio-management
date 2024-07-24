@@ -1,27 +1,24 @@
 package com.fpm.userservice.db.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Data;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
-import java.time.LocalDateTime;
-
-@Entity
+@DynamoDbBean
 @Data
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String userId;
-    private String userName;
-    private String password;
+    private String username;
     private String email;
-    private String firstName;
-    private String lastName;
-    private LocalDateTime createdAt;
-    private String updatedAt;
+    private String password;
+
+    @DynamoDbPartitionKey
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
 }

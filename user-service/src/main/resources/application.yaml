@@ -1,0 +1,4 @@
+aws:
+  region: your-aws-region
+  credentials:
+    profile-name: your-aws-profile
