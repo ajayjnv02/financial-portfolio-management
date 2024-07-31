@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class UserService {
+public class UserLambdaService {
 
     private final DynamoDbClient dynamoDbClient;
 
-    public UserService() {
+    public UserLambdaService() {
         this.dynamoDbClient = DynamoDbClient.builder()
                 .region(Region.US_EAST_1)
                 .credentialsProvider(ProfileCredentialsProvider.create())

@@ -18,6 +18,7 @@
         <spring.boot.version>3.1.4</spring.boot.version>
         <lombok.version>1.18.20</lombok.version>
         <postgresql.version>42.2.20</postgresql.version>
+        <spring.cloud.aws.version>3.0.0</spring.cloud.aws.version>
         <gson.version>2.11.0</gson.version>
     </properties>
 

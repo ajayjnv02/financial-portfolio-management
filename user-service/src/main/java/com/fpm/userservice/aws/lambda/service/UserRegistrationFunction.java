@@ -12,12 +12,12 @@ import java.util.function.Function;
 public class UserRegistrationFunction {
 
     @Autowired
-    private UserService userService;
+    private UserLambdaService userLambdaService;
 
     @Bean
     public Function<User, String> registerUser() {
         return user -> {
-            userService.registerUser(user);
+            userLambdaService.registerUser(user);
             return "User registered successfully";
         };
     }

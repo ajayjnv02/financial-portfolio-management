@@ -1,4 +1,6 @@
-aws:
-  region: your-aws-region
+cloud:
+  aws:
+    region:
+      static: us-east-1
   credentials:
-    profile-name: your-aws-profile
+    profile-name: default
