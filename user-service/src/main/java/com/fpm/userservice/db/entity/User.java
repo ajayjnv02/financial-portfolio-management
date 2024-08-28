@@ -1,24 +1,36 @@
 package com.fpm.userservice.db.entity;
 
-import lombok.Data;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-@DynamoDbBean
-@Data
+@Entity
 public class User {
-    private String userId;
+
+    @Id
     private String username;
-    private String email;
-    private String password;
+    private String passwordHash;
 
-    @DynamoDbPartitionKey
-    public String getUserId() {
-        return userId;
+    public User() {
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public User(String username, String passwordHash) {
+        this.username = username;
+        this.passwordHash = passwordHash;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 }
