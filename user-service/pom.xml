@@ -92,7 +92,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Assembly Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -102,10 +101,10 @@
                             <mainClass>com.fpm.userservice.UserServiceApplication</mainClass>
                         </manifest>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <finalName>UserServiceApplication</finalName>
+                    <descriptors>
+                        <descriptor>src/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                    <finalName>user-service-lambda</finalName>
                 </configuration>
                 <executions>
                     <execution>
