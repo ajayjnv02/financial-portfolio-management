@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <!-- For example, if you want MyBatis to use camel case for column names -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- Adjust any other settings you need -->
+    </settings>
+</configuration>

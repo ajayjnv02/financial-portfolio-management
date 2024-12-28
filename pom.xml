@@ -28,6 +28,7 @@
     </modules>
 
     <dependencyManagement>
+
         <dependencies>
             <!-- AWS Lambda Core -->
             <dependency>
@@ -35,15 +36,44 @@
                 <artifactId>aws-lambda-java-core</artifactId>
                 <version>1.2.2</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>5.2.0</version>
+            </dependency>
 
-            <!-- AWS Lambda Events (API Gateway) -->
+            <!-- AWS Lambda Events (for API Gateway) -->
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-lambda-java-events</artifactId>
                 <version>3.11.0</version>
             </dependency>
 
-            <!-- Logging -->
+            <!-- MyBatis -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.5.13</version>
+            </dependency>
+
+            <!-- MyBatis with MySQL driver (adjust if using PostgreSQL, etc.) -->
+            <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.33</version>
+            </dependency>
+
+
+            <!-- Bcrypt (jbcrypt) for password hashing -->
+            <dependency>
+                <groupId>org.mindrot</groupId>
+                <artifactId>jbcrypt</artifactId>
+                <version>0.4</version>
+            </dependency>
+
+            <!-- Logging (optional) -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
@@ -54,28 +84,8 @@
                 <artifactId>log4j-api</artifactId>
                 <version>2.19.0</version>
             </dependency>
-
-            <!-- JDBC Driver (MySQL as example) -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.1.0</version>
-            </dependency>
-
-            <!-- Redis client: Jedis (choose your preference) -->
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>4.3.1</version>
-            </dependency>
-
-            <!-- Bcrypt for password hashing (Spring Security Crypto) -->
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-crypto</artifactId>
-                <version>6.1.1</version>
-            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <build>
