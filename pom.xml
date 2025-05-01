@@ -1,145 +1,107 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.fpm</groupId>
     <artifactId>financial-portfolio-management</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-
-
-    <properties>
-        <java.version>17</java.version>
-        <spring-boot.version>3.3.0</spring-boot.version>
-        <aws-java-sdk.version>2.20.0</aws-java-sdk.version>
-        <spring-data-redis.version>3.1.0</spring-data-redis.version>
-        <postgresql.version>42.6.0</postgresql.version>
-        <gson.version>2.10.1</gson.version>
-        <lettuce.version>6.4.0.RELEASE</lettuce.version>
-    </properties>
+    <name>Financial Portfolio Management</name>
 
     <modules>
+        <module>common-lib</module>
         <module>user-service</module>
         <module>portfolio-service</module>
         <module>investment-service</module>
         <module>trade-service</module>
-        <module>notification-service</module>
         <module>price-alert-service</module>
-        <module>common</module>
+        <module>notification-service</module>
+        <module>market-data-service</module>
+        <module>saga-orchestrator</module>
+        <module>graphql-gateway</module>
     </modules>
 
+    <properties>
+        <java.version>17</java.version>
+        <spring.boot.version>3.2.4</spring.boot.version>
+        <avro.version>1.11.1</avro.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
     <dependencyManagement>
-
         <dependencies>
-            <!-- AWS Lambda Core -->
             <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-lambda-java-core</artifactId>
-                <version>1.2.2</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>5.2.0</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
-            <!-- AWS Lambda Events (for API Gateway) -->
+            <!-- External dependencies -->
             <dependency>
-                <groupId>com.amazonaws</groupId>
-                <artifactId>aws-lambda-java-events</artifactId>
-                <version>3.11.0</version>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>1.11.1</version>
             </dependency>
 
-            <!-- MyBatis -->
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>3.5.13</version>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-avro-serializer</artifactId>
+                <version>7.5.0</version>
             </dependency>
 
-            <!-- MyBatis with MySQL driver (adjust if using PostgreSQL, etc.) -->
-            <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.33</version>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>sns</artifactId>
+                <version>2.25.27</version>
             </dependency>
 
-
-            <!-- Bcrypt (jbcrypt) for password hashing -->
             <dependency>
-                <groupId>org.mindrot</groupId>
-                <artifactId>jbcrypt</artifactId>
-                <version>0.4</version>
-            </dependency>
-
-            <!-- Logging (optional) -->
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>2.19.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>2.19.0</version>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>ses</artifactId>
+                <version>2.25.27</version>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
 
     <build>
         <pluginManagement>
             <plugins>
-                <!-- Spring Boot Maven Plugin -->
+                <!-- Spring Boot Plugin -->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version> <!-- Use a compatible version -->
-                    <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.3.0</version>
                 </plugin>
 
-                <!-- Maven Shade Plugin to build a single fat JAR for AWS Lambda -->
+                <!-- Avro Code Generation Plugin -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro-maven-plugin</artifactId>
+                    <version>${avro.version}</version>
                     <executions>
                         <execution>
-                            <phase>package</phase>
+                            <phase>generate-sources</phase>
                             <goals>
-                                <goal>shade</goal>
+                                <goal>schema</goal>
                             </goals>
                             <configuration>
-                                <createDependencyReducedPom>false</createDependencyReducedPom>
+                                <sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
+                                <outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
                             </configuration>
                         </execution>
                     </executions>
                 </plugin>
-
             </plugins>
-
-
         </pluginManagement>
     </build>
     <repositories>
         <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
         </repository>
-
     </repositories>
 </project>
