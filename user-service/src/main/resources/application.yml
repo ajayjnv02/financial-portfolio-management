@@ -1,9 +1,14 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/userdb
-    username: youruser
-    password: yourpass
+    username: postgres
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+dgs:
+  graphql:
+    graphiql:
+      enabled: true

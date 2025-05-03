@@ -6,31 +6,31 @@ A robust, event-driven, GraphQL-powered microservices architecture for managing 
 
 ## 📦 Microservices Overview
 
-| Service                | Purpose                              | Tech Stack |
-|------------------------|--------------------------------------|------------|
-| `user-service`         | User registration & authentication   | Spring Boot, GraphQL, PostgreSQL, OAuth2 |
-| `portfolio-service`    | Manage user portfolios               | Spring Boot, GraphQL, PostgreSQL |
-| `investment-service`   | Track and analyze investments        | Spring Boot, GraphQL, Cassandra, Kafka |
-| `trade-service`        | Trade execution & event sourcing     | Spring Boot, GraphQL, Kafka, PostgreSQL |
-| `price-alert-service`  | Monitor prices & send alerts         | Spring Boot, Redis, Kafka, REST |
-| `notification-service` | Send emails/SMS/push notifications   | AWS Lambda, SNS, SES |
-| `market-data-service`  | Ingest price data from external APIs | Spring Boot, REST, Kafka, Cassandra |
-| `saga-orchestrator`    | Handle distributed workflows         | Kafka / AWS Step Functions |
-| `graphql-gateway`      | Unified GraphQL entry point          | Apollo Gateway / Spring GraphQL |
+| Service                | Purpose                                     | Tech Stack |
+|------------------------|---------------------------------------------|------------|
+| `user-service`         | User registration & authentication          | Spring Boot,  PostgreSQL, OAuth2 |
+| `portfolio-service`    | Manage user portfolios                      | Spring Boot,  PostgreSQL |
+| `investment-service`   | Track and analyze investments               | Spring Boot,  Cassandra, Kafka |
+| `trade-service`        | Trade execution & event sourcing            | Spring Boot,  Kafka, PostgreSQL |
+| `price-alert-service`  | Monitor prices & send alerts                | Spring Boot, Redis, Kafka, REST |
+| `notification-service` | Send emails/SMS/push notifications          | AWS Lambda, SNS, SES |
+| `market-data-service`  | Ingest price data from external APIs        | Spring Boot, REST, Kafka, Cassandra |
+| `saga-orchestrator`    | Handle distributed workflows                | Kafka / AWS Step Functions |
+| `graphql-gateway`      | Centralized Apollo GraphQL Server (Node.js) | Apollo Server 4, Federation |
 
 ---
 
 ## 🔧 Tech Stack
 
 - **Language**: Java 17
-- **Frameworks**: Spring Boot 3, Spring GraphQL, Spring Data JPA
+- **Frameworks**: Spring Boot 3, Spring Data JPA
 - **Message Broker**: Apache Kafka (Confluent MSK)
 - **Database**:
   - PostgreSQL (User, Portfolio, Trade)
   - Cassandra / DynamoDB (Investments, Market Data)
   - Redis (Price Alerts)
 - **Schema & APIs**:
-  - GraphQL Federation (Apollo/Spring Gateway)
+  - Apollo Federation (Apollo Server 4)
   - OpenAPI (Admin/Batch APIs)
   - Avro (Kafka event schemas)
   - Protobuf (optional, internal gRPC)
