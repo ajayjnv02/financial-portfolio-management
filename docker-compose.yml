@@ -1,30 +1,141 @@
+version: '3.8'
+
 services:
+
+  # PostgreSQL database
   postgres:
     image: postgres:14
     container_name: userdb
-    restart: always
+    ports:
+      - "5433:5432"
     environment:
       POSTGRES_DB: userdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  # Keycloak for OAuth2
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    container_name: keycloak
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HOSTNAME: keycloak
+    command:
+      - start-dev
+      - --import-realm
+
+  # User Service
   user-service:
     build:
-      context: ./user-service
+      context: .
+      dockerfile: user-service/Dockerfile
     container_name: user-service
     ports:
       - "8080:8080"
     depends_on:
       - postgres
+      - keycloak
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/userdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      KEYCLOAK_REALM: fpm-realm
+      KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080
+      KEYCLOAK_RESOURCE: fpm-client
+      KEYCLOAK_CREDENTIALS_SECRET: secret
+      KEYCLOAK_ISSUER_URI: http://keycloak:8080/realms/fpm-realm
+
+  # Portfolio Service
+  portfolio-service:
+    build:
+      context: .
+      dockerfile: portfolio-service/Dockerfile
+    container_name: portfolio-service
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgres
+      - keycloak
+
+  # Investment Service
+  investment-service:
+    build:
+      context: .
+      dockerfile: investment-service/Dockerfile
+    container_name: investment-service
+    ports:
+      - "8083:8080"
+    depends_on:
+      - postgres
+      - keycloak
+
+  # Trade Service
+  trade-service:
+    build:
+      context: .
+      dockerfile: trade-service/Dockerfile
+    container_name: trade-service
+    ports:
+      - "8084:8080"
+    depends_on:
+      - postgres
+      - keycloak
+
+  # Price Alert Service
+  price-alert-service:
+    build:
+      context: .
+      dockerfile: price-alert-service/Dockerfile
+    container_name: price-alert-service
+    ports:
+      - "8085:8080"
+    depends_on:
+      - postgres
+      - keycloak
+
+  # Notification Service
+  notification-service:
+    build:
+      context: .
+      dockerfile: notification-service/Dockerfile
+    container_name: notification-service
+    ports:
+      - "8086:8080"
+    depends_on:
+      - postgres
+      - keycloak
+
+  # Market Data Service
+  market-data-service:
+    build:
+      context: .
+      dockerfile: market-data-service/Dockerfile
+    container_name: market-data-service
+    ports:
+      - "8087:8080"
+    depends_on:
+      - postgres
+      - keycloak
+
+  # Saga Orchestrator
+  saga-orchestrator:
+    build:
+      context: .
+      dockerfile: saga-orchestrator/Dockerfile
+    container_name: saga-orchestrator
+    ports:
+      - "8088:8080"
+    depends_on:
+      - postgres
+      - keycloak
 
 volumes:
   pgdata:

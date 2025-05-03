@@ -12,10 +12,6 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.fpm</groupId>
-            <artifactId>common-lib</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+
     </dependencies>
 </project>

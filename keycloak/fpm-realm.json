@@ -1,0 +1,49 @@
+{
+  "realm": "fpm-realm",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "fpm-client",
+      "secret": "secret",
+      "enabled": true,
+      "directAccessGrantsEnabled": true,
+      "publicClient": false,
+      "redirectUris": ["*"],
+      "baseUrl": "http://localhost:8080",
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": true,
+      "webOrigins": ["*"],
+      "rootUrl": "http://localhost:8080"
+    }
+  ],
+  "users": [
+    {
+      "username": "ajay@example.com",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "AJAY",
+      "lastName": "KUMAR",
+      "email": "ajay@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "ajay1234",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["offline_access", "uma_authorization"],
+      "clientRoles": {
+        "fpm-client": ["user"]
+      }
+    }
+  ],
+  "roles": {
+    "realm": [
+      { "name": "user" },
+      { "name": "admin" }
+    ]
+  }
+}
